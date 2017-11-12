@@ -1,0 +1,101 @@
+.module_menu{
+font: bold 13px arial,Verdana;
+background: #0063a6;
+width: 1000px;
+float: left;
+display: block;
+
+}
+.module_menu a{
+font: 13px arial,Verdana;
+}
+.module_menu ul{
+margin: 0;
+
+padding: 0;
+padding-top: 3px;
+padding-bottom: 3px;
+list-style-type: none;
+}
+
+/*Top level list items*/
+.module_menu ul li{
+position: relative;
+display: inline;
+float: left;
+}
+
+/*Top level menu link items style*/
+.module_menu ul li a{
+display: block;
+background: #0063a6; /*background of tabs (default state)*/
+color: white;
+padding: 6px 17px;
+
+
+text-decoration: none;
+}
+
+* html .module_menu ul li a{ /*IE6 hack to get sub menu links to behave correctly*/
+display: inline-block;
+}
+
+.module_menu ul li a:link, .module_menu ul li a:visited{
+color: #fff;
+}
+
+.module_menu ul li a:hover{
+background: #024A94; /*tab link background during hover state*/
+color: #fff;
+}
+	
+/*1st sub level menu*/
+.module_menu ul li ul{
+position: absolute;
+left: 0;
+display: block;
+visibility: hidden;
+}
+
+/*Sub level menu list items (undo style from Top level List Items)*/
+.module_menu ul li ul li{
+display: list-item;
+float: none;
+}
+
+/*All subsequent sub menu levels vertical offset after 1st level sub menu */
+.module_menu ul li ul li ul{
+top: 0;
+}
+
+/* Sub level menu links style */
+.module_menu ul li ul li a{
+font: normal 11px Arial;
+width: 160px; /*width of sub menus*/
+padding: 5px;
+padding-top: 2px;
+padding-bottom: 2px;
+
+margin: 0;
+border-top-width: 0;
+border-bottom: 1px solid #fff;
+}
+
+.module_menu ul li ul li a:hover{ /*sub menus hover style*/
+background: #fff;
+color: black;
+}
+
+/* ######### CSS classes applied to down and right arrow images  ######### */
+
+.downarrowclass{
+position: absolute;
+top: 12px;
+right: 7px;
+}
+
+.rightarrowclass{
+position: absolute;
+top: 6px;
+right: 5px;
+}

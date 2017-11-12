@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<install type="module" version="1.5.0">
+<name>Mainpage</name>
+<author>t</author>
+<creationDate>2010-09-24</creationDate>
+<license>GNU GPL v.2</license>
+<authorEmail>tomasz.kaniowski@blueroom.pl</authorEmail>
+<authorUrl>http://www.blueroom.pl</authorUrl>
+<version>0.1</version>
+<description>no description</description>
+  <files>
+	<filename>mod_mainpage.xml</filename>
+	<filename module="mod_mainpage">mod_mainpage.php</filename>
+	<filename>helper.php</filename>
+	<filename>tv_content.php</filename>
+	<filename>index.html</filename>
+	<filename>tmpl/default.php</filename>
+	<filename>tmpl/index.html</filename>
+  </files>
+
+  <config>
+		<fields name="params">
+			<fieldset name="basic">
+				
+		
+				 <field
+				name="email" type="text" default="" label="Email" 
+				 />
+			
+				
+			</fieldset>
+			
+		</fields>
+	</config>
+</install>

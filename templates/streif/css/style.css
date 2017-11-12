@@ -1,0 +1,367 @@
+body{ 
+
+background: url("../img/tlo.png") repeat-x #efefef;
+color:#666;
+font-family:Arial,Helvetica,sans-serif;
+font-size:11px;
+
+
+height:500px;
+line-height:1.35em;
+margin: 0;
+padding:0; }
+a {
+background-image:url("../img/a1.gif");
+background-position:left center;
+background-repeat:no-repeat;
+border:0 none;
+color:#024A94;
+display:inline-block;
+font-size:11px;
+padding-left:12px;
+text-decoration:none;
+}
+a:hover {
+text-decoration:underline;
+}
+h1,h2,h3,h4,h5,h6{
+color: #024A94;
+}
+#wszystko{
+  width: 1000px;
+  background-color:#EFEFEF;
+  margin: 0 auto;
+position: relative;
+margin-bottom: -20px;
+padding-top: 20px;
+}
+#top_bb{
+width: 1000px; border-top: 1px solid rgb(2, 74, 148); border-bottom: 1px solid rgb(2, 74, 148); padding-top: 2px; padding-bottom: 0px; height: 28px;
+float: left;
+margin-top: 8px;
+background: #fff;
+}
+#top_bb h1{
+  margin: 0;
+  padding: 0;
+}
+#top_bb h1 a{
+  display: block;
+  text-indent: -2000px;
+  background: url('../img/_sbl_logo.gif');
+  width: 120px;
+  height: 24px;
+}
+#top_bb2{
+float: left;
+width: 1000px;
+background-color:#fff;
+}
+
+#top_bb2 h2{
+  margin: 0;
+  padding: 0;
+   float: left;
+}
+#top_bb2 h2 a{
+	background:url("../img/_sbl_logo_sub.gif") repeat scroll 0 0 transparent;
+	display:block;
+	height:20px;
+	margin:2px 55px 5px;
+	text-indent:-999px;
+	width:59px;
+}
+#top_menu{
+position: absolute;
+right: 20px;
+top: 5px;
+}
+#top_menu ul span{
+  font-size: 14px; vertical-align: middle; float: left; margin-left: 10px; margin-right: 10px;
+}
+#top_menu ul{
+  list-style-type: none;
+  float: right;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 5px;
+}
+#top_menu li{
+  float: left;
+}
+#top_menu ul a{
+  background: none;
+  color: #aaa;
+  font-size: 9px;
+  text-decoration: none;
+  padding:0 10px; 
+}
+
+.search{
+position: absolute;
+right: 4px;
+top: 93px;
+display: block;
+}
+.search input{
+height:22px;
+position:relative;
+top:-2px;
+border:0;
+background-color:#0063A6;
+color:#fff;
+cursor:pointer;
+
+}
+#searchfield{
+border:1px solid #C0C0C0;
+height:18px;
+position:relative;
+top:-3px;
+background-color:#fff !important;
+}
+
+#main_menu{
+  float: left;
+  width: 900px;
+  z-index: 10;
+  height: 13px;
+  display: block;
+  position: relative;
+}
+#main_menu ul{
+  list-style-type: none;
+  float: left;
+  height: 17px;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 5px;
+  background: url('../img/_home_sup_head_2_0.jpg') no-repeat right;
+  padding-right: 13px;
+}
+#main_menu li{
+  float: left;
+}
+#main_menu ul a{
+  color: #3D4751;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  padding-left: 9px;
+  padding-right: 11px;
+  background: #eee;
+  height: 18px;
+  display: block;
+}
+#main_menu ul a:hover{
+
+  background: #fff;
+}
+.active{ background: #fff;}
+#banner{
+  float: left;
+  width: inherit;
+
+  z-index: 5;
+
+}
+#bb{
+margin-top: 11px;
+}
+#mb{
+  float:left;
+  margin-top: 10px;
+  text-align: center;
+  width: 1000px;
+}
+#c{
+  float: left;
+  width: 1000px;
+background-color:#fff;
+border: 1px solid #ccc;
+  margin-top: 5px;
+}
+#lewemenu{
+ display: block;
+ float: left;
+ padding: 10px;
+ width: 140px;
+}
+.lm{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.35em;
+}
+.lm a{
+background: none;
+}
+.lm li{
+
+  display: block;
+  padding-top:3px;
+  padding-bottom: 3px;
+}
+.lm li a{
+  border-bottom: 1px solid #eee;
+  display: block;
+  width:  138px;
+}
+.lm li ul{
+  margin: 0;
+  padding: 0;
+}
+.lm li li{
+  border-bottom: 1px solid #eee;
+  display: block;
+  width: 150px;
+
+}
+.lm li li a{
+  border: 0;
+  margin-left: 10px;
+}
+#tresc{
+ font: 11px Arial,Helvetica,sans-serif;
+ color: #555;
+ line-height: 17px;
+ display: block;
+ float: left;
+ width: 800px;
+ padding: 10px;
+}
+#tresc h3,.contentheading{
+  font: 16px bold Arial,Helvetica,sans-serif;
+  color: #024A94;
+  width: 100%;
+  display: block;
+  float: left;
+  border-bottom: 1px solid #eee;
+  line-height: 1.15em;
+}
+#tresc ul{ float: left;}
+
+#maincont{
+width: inherit;
+float: left; }
+#mainh3{
+  width: 395px;
+  padding: 10px 280px;
+  margin-left: 20px;
+  float: left;
+  text-align: justify;
+  background: url('../img/h3_bg.png') repeat-x;
+  background-position: 0px 20px;
+  font-weight: bold;
+}
+#mainh3 h3{
+  font: 17px Arial,Helvetica,sans-serif;
+  font-weight: 300;
+  color: #024A94;
+  text-align: center;
+  background: #efefef;
+  padding: 5px;
+}
+
+#mainh3 h3 strong {
+font-weight: 700 !important;
+}
+#leftercol{
+  float: left;
+  display: block;
+  text-align:justify;
+  margin-right: 10px;
+}
+#leftcol{
+  float: left;
+  display: block;
+  /*text-align:justify;*/
+  margin-right: 10px;
+}
+#midcol{
+  float: left;
+  display: block;
+  /*text-align:justify;*/
+  margin-right: 10px;
+}
+#rightcol{
+  float: left;
+  display: block;
+}
+#rightcol img{
+  float: left;
+}
+#rightcol p{
+  float: left;
+  
+  width: 170px;
+  
+}
+.maincol{
+  background: #fff;
+  border: 1px solid #ccc;
+  width: 210px;
+  float: left;
+  padding: 10px 10px 20px 20px;
+  height: 500px;
+  -moz-border-radius: 7px; 
+  -webkit-border-radius: 7px; 
+  -khtml-border-radius: 7px; 
+  border-radius: 7px;
+
+}
+#stopka{
+clear: both;
+float: left;
+background-color:#fff;
+display: block;
+border: 1px solid #ccc; width: 1000px;
+border-bottom: 0; 
+margin-top: 24px;
+position: relative; line-height: 9px; font-size: 10px; color: rgb(170, 170, 170); padding-top: 3px; padding-bottom: 4px; padding-right:2px; 
+
+-moz-border-radius: 7px; 
+-webkit-border-radius: 7px; 
+-khtml-border-radius: 7px; 
+border-radius: 7px;
+}
+#stopka a, #stopka a:link, #stopka a:visited {
+	font-size:10px;
+}
+.blog_more div { display: none;}
+.blog_more ul { list-style-type: none;}
+.pagination{ text-align: center; }
+.pagination ul{ list-style-type:none; }
+.pagination li{ display: inline; }
+
+
+.articleContent, .item-page{
+  	padding:5px 15px !important;
+	text-indent:0 !important;
+	}
+.item-page ul li{
+  list-style-image: url(http://www.streif-baulogistik.de/sbl/_img/bullet_2.gif);
+list-style-position: outside;
+  line-height:140%;
+  
+
+	}
+.item-page ol li{
+	list-style-type:decimal;
+	}
+.item-page p {clear:both;}
+.gallery a{background: none; padding-left: 0; }
+.jg_element_txt { text-align: center; display: block; width: 100%; float: left;}
+.jg_element_txt  ul{ width: 100%; text-align: center;}
+
+.jg_element_txt ul li a{ text-align: center; display: block;}
+.jg_subcatelem_txt { text-align: center; display: block; width: 100%; float: left;}
+.jg_subcatelem_txt  ul{ width: 100%; text-align: center;}
+
+.jg_subcatelem_txt ul li a{ text-align: center; display: block; font-weight: bold;}
+.jg_subcatelem_txt ul li img{display: none;}
+.jg_subcatelem_cat{ width: 30%}
+.jg_pathway img {display: none;}
+.jg_element_cat{ margin: 0 auto; float: none; }
+

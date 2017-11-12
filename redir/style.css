@@ -1,0 +1,110 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Arial, sans-serif;
+	color: #525252;		
+}
+
+* {
+	box-sizing: border-box;
+}
+
+a, a:hover {
+	color: #f7a941;
+	text-decoration: none;
+}
+
+p {
+	font-size: 16px;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: normal;
+}
+
+#background {
+	background: url('streif_trinac.jpg');
+	background-position: top center;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-repeat: no-repeat;
+}
+
+#popover {
+	background: #fff;
+	width: 940px;
+	height: 420px;
+	position: fixed;
+	top: 50%;
+	margin-top: -210px;
+	left: 50%;
+	margin-left: -470px;	
+	-webkit-box-shadow: 0px 3px 19px 0px rgba(30, 30, 30, 0.14);
+	-moz-box-shadow:    0px 3px 19px 0px rgba(30, 30, 30, 0.14);
+	box-shadow:         0px 3px 19px 0px rgba(30, 30, 30, 0.14);
+	padding: 20px;
+}
+
+#inner {
+	padding: 70px 9%;
+	width: 100%;
+	height: 100%;
+	background: url('popover-texture.jpg') #fff;
+	background-position: center center;
+	background-repeat: no-repeat;	
+}
+
+.logo {
+	display: block;	
+	margin-bottom: 40px;
+}
+
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;	
+	border-left: 4px solid #F7A941;	
+	display: inline-block;
+}
+
+.hide {
+	display: none;
+}
+
+#language_switch {
+	list-style-type: none;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	right: 30px;
+	margin-top: 20px;
+}
+
+#language_switch li {
+	float: left;	
+	font-size: 10px;
+	cursor: pointer;
+}
+
+#language_switch li a {
+	padding: 10px 15px;
+	display: block;
+	color: #525252;
+}
+
+.active_language {
+	background-color: #fff;
+}
+
+
+@media (max-width: 940px) {
+	#popover {
+		width: 100%;
+		margin-left: 0;
+		left: 0;
+	}
+}
+
