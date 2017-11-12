@@ -2,3 +2,4 @@ images/*
 configuration.php
 tmp/*
 cache/* 
+att/*
