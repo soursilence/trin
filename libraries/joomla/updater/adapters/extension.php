@@ -3,7 +3,7 @@
  * @package     Joomla.Platform
  * @subpackage  Updater
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -34,8 +34,12 @@ class JUpdaterExtension extends JUpdateAdapter
 	{
 		array_push($this->_stack, $name);
 		$tag = $this->_getStackLocation();
-		// reset the data
-		eval('$this->' . $tag . '->_data = "";');
+
+		// Reset the data
+		if (isset($this->$tag))
+		{
+			$this->$tag->_data = "";
+		}
 
 		switch ($name)
 		{
@@ -48,6 +52,8 @@ class JUpdaterExtension extends JUpdateAdapter
 				break;
 			// Don't do anything
 			case 'UPDATES':
+				// Store compatibility info per updates block (usually one per file)
+				$this->compatibility = array();
 				break;
 			default:
 				if (in_array($name, $this->_updatecols))
@@ -58,6 +64,15 @@ class JUpdaterExtension extends JUpdateAdapter
 				if ($name == 'TARGETPLATFORM')
 				{
 					$this->current_update->targetplatform = $attrs;
+
+					if (isset($attrs['NAME']) && ($attrs['NAME'] == 'joomla') && !empty($attrs['VERSION']))
+					{
+						$this->current_update->compatibility = $attrs['VERSION'];
+					}
+				}
+				if ($name == 'PHP_MINIMUM')
+				{
+					$this->current_update->php_minimum = '';
 				}
 				break;
 		}
@@ -82,22 +97,56 @@ class JUpdaterExtension extends JUpdateAdapter
 			case 'UPDATE':
 				$ver = new JVersion;
 				$product = strtolower(JFilterInput::getInstance()->clean($ver->PRODUCT, 'cmd')); // lower case and remove the exclamation mark
+
+				// Keep compatibility information in class property
+				if (isset($this->current_update->compatibility))
+				{
+					$this->compatibility[$this->current_update->version][] = $this->current_update->compatibility;
+					unset($this->current_update->compatibility);
+				}
+
 				// Check that the product matches and that the version matches (optionally a regexp)
 				if ($product == $this->current_update->targetplatform['NAME']
 					&& preg_match('/' . $this->current_update->targetplatform['VERSION'] . '/', $ver->RELEASE))
 				{
-					// Target platform isn't a valid field in the update table so unset it to prevent J! from trying to store it
-					unset($this->current_update->targetplatform);
-					if (isset($this->latest))
+					// Check if PHP version supported via <php_minimum> tag, assume true if tag isn't present
+					if (!isset($this->current_update->php_minimum) || version_compare(PHP_VERSION, $this->current_update->php_minimum, '>='))
 					{
-						if (version_compare($this->current_update->version, $this->latest->version, '>') == 1)
-						{
-							$this->latest = $this->current_update;
-						}
+						$phpMatch = true;
 					}
 					else
 					{
-						$this->latest = $this->current_update;
+						// Notify the user of the potential update
+						$msg = JText::sprintf(
+							'JLIB_INSTALLER_AVAILABLE_UPDATE_PHP_VERSION',
+							$this->current_update->name,
+							$this->current_update->version,
+							$this->current_update->php_minimum,
+							PHP_VERSION
+						);
+
+						JFactory::getApplication()->enqueueMessage($msg, 'warning');
+
+						$phpMatch = false;
+					}
+
+					// Target platform and php_minimum aren't valid fields in the update table so unset them to prevent J! from trying to store them
+					unset($this->current_update->targetplatform);
+					unset($this->current_update->php_minimum);
+
+					if ($phpMatch)
+					{
+						if (isset($this->latest))
+						{
+							if (version_compare($this->current_update->version, $this->latest->version, '>') == 1)
+							{
+								$this->latest = $this->current_update;
+							}
+						}
+						else
+						{
+							$this->latest = $this->current_update;
+						}
 					}
 				}
 				break;
@@ -128,6 +177,11 @@ class JUpdaterExtension extends JUpdateAdapter
 			$tag = strtolower($tag);
 			$this->current_update->$tag .= $data;
 		}
+				
+		if ($tag == 'PHP_MINIMUM')
+		{
+			$this->current_update->php_minimum = $data;
+		}
 	}
 
 	/**
@@ -141,9 +195,10 @@ class JUpdaterExtension extends JUpdateAdapter
 	 */
 	public function findUpdate($options)
 	{
-		$url = $options['location'];
+		$url = trim($options['location']);
 		$this->_url = &$url;
 		$this->_update_site_id = $options['update_site_id'];
+
 		if (substr($url, -4) != '.xml')
 		{
 			if (substr($url, -1) != '/')
@@ -155,7 +210,18 @@ class JUpdaterExtension extends JUpdateAdapter
 
 		$dbo = $this->parent->getDBO();
 
-		if (!($fp = @fopen($url, "r")))
+		$http = JHttpFactory::getHttp();
+
+		try
+		{
+			$response = $http->get($url);
+		}
+		catch (Exception $exc)
+		{
+			$response = null;
+		}
+
+		if (is_null($response) || ($response->code != 200))
 		{
 			$query = $dbo->getQuery(true);
 			$query->update('#__update_sites');
@@ -167,6 +233,7 @@ class JUpdaterExtension extends JUpdateAdapter
 			JLog::add("Error opening url: " . $url, JLog::WARNING, 'updater');
 			$app = JFactory::getApplication();
 			$app->enqueueMessage(JText::sprintf('JLIB_UPDATER_ERROR_EXTENSION_OPEN_URL', $url), 'warning');
+
 			return false;
 		}
 
@@ -175,17 +242,17 @@ class JUpdaterExtension extends JUpdateAdapter
 		xml_set_element_handler($this->xml_parser, '_startElement', '_endElement');
 		xml_set_character_data_handler($this->xml_parser, '_characterData');
 
-		while ($data = fread($fp, 8192))
+		if (!xml_parse($this->xml_parser, $response->body))
 		{
-			if (!xml_parse($this->xml_parser, $data, feof($fp)))
-			{
-				JLog::add("Error parsing url: " . $url, JLog::WARNING, 'updater');
-				$app = JFactory::getApplication();
-				$app->enqueueMessage(JText::sprintf('JLIB_UPDATER_ERROR_EXTENSION_PARSE_URL', $url), 'warning');
-				return false;
-			}
+			JLog::add("Error parsing url: " . $url, JLog::WARNING, 'updater');
+			$app = JFactory::getApplication();
+			$app->enqueueMessage(JText::sprintf('JLIB_UPDATER_ERROR_EXTENSION_PARSE_URL', $url), 'warning');
+
+			return false;
 		}
+
 		xml_parser_free($this->xml_parser);
+
 		if (isset($this->latest))
 		{
 			if (isset($this->latest->client) && strlen($this->latest->client))
@@ -193,12 +260,14 @@ class JUpdaterExtension extends JUpdateAdapter
 				$this->latest->client_id = JApplicationHelper::getClientInfo($this->latest->client, 1)->id;
 				unset($this->latest->client);
 			}
+
 			$updates = array($this->latest);
 		}
 		else
 		{
 			$updates = array();
 		}
-		return array('update_sites' => array(), 'updates' => $updates);
+
+		return array('update_sites' => array(), 'updates' => $updates, 'compatibility' => $this->compatibility);
 	}
 }

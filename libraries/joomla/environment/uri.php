@@ -3,7 +3,7 @@
  * @package     Joomla.Platform
  * @subpackage  Environment
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -188,11 +188,8 @@ class JURI extends JObject
 					}
 				}
 
-				// Check for quotes in the URL to prevent injections through the Host header
-				if ($theURI !== str_replace(array("'", '"', '<', '>'), '', $theURI))
-				{
-					throw new InvalidArgumentException('Invalid URI detected.');
-				}
+				// Extra cleanup to remove invalid chars in the URL to prevent injections through the Host header
+				$theURI = str_replace(array("'", '"', '<', '>'), array("%27", "%22", "%3C", "%3E"), $theURI);
 			}
 			else
 			{

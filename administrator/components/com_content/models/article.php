@@ -2,7 +2,7 @@
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -114,6 +114,9 @@ class ContentModelArticle extends JModelAdmin
 
 			// Reset the ID because we are making a copy
 			$table->id = 0;
+			
+			// Reset hits because we are making a copy
+ 			$table->hits = 0;			
 
 			// New category ID
 			$table->catid = $categoryId;

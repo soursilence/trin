@@ -3,7 +3,7 @@
  * @package     Joomla.Administrator
  * @subpackage  com_finder
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -327,6 +327,9 @@ abstract class FinderIndexerAdapter extends JPlugin
 		// Run the setup method.
 		$this->setup();
 
+		// Remove the old item.
+		$this->remove($id);
+
 		// Get the item.
 		$item = $this->getItem($id);
 
@@ -419,7 +422,7 @@ abstract class FinderIndexerAdapter extends JPlugin
 			$this->change((int) $item->id, 'access', $temp);
 
 			// Reindex the item
-			$this->reindex($row->id);
+			$this->reindex($item->id);
 		}
 	}
 

@@ -2,7 +2,7 @@
 /**
  * @package		Joomla.Site
  * @subpackage	mod_menu
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -25,7 +25,7 @@ $flink = JFilterOutput::ampReplace(htmlspecialchars($flink));
 switch ($item->browserNav) :
 	default:
 	case 0:
-?><a <?php echo $class; ?>href="<?php echo $flink; ?>" <?php if($flink=='#'){ echo 'data-toggle="dropdown"'; }?> <?php echo $title; ?>><?php echo $linktype; ?><?php if($item->flink=='#'){ echo '<span class="caret"></span></a>'; }?></a><?php
+?><a <?php echo $class; ?>href="<?php echo $flink; ?>" <?php echo $title; ?>><?php echo $linktype; ?></a><?php
 		break;
 	case 1:
 		// _blank

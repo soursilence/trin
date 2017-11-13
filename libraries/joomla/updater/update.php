@@ -3,7 +3,7 @@
  * @package     Joomla.Platform
  * @subpackage  Updater
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -166,8 +166,12 @@ class JUpdate extends JObject
 	{
 		array_push($this->_stack, $name);
 		$tag = $this->_getStackLocation();
+
 		// Reset the data
-		eval('$this->' . $tag . '->_data = "";');
+		if (isset($this->$tag))
+		{
+			$this->$tag->_data = "";
+		}
 
 		switch ($name)
 		{
@@ -181,6 +185,10 @@ class JUpdate extends JObject
 			// For everything else there's...the default!
 			default:
 				$name = strtolower($name);
+				if (!isset($this->_current_update->$name))
+				{
+					$this->_current_update->$name = new stdClass;
+				}
 				$this->_current_update->$name->_data = '';
 				foreach ($attrs as $key => $data)
 				{
@@ -214,16 +222,29 @@ class JUpdate extends JObject
 				if ($product == $this->_current_update->targetplatform->name
 					&& preg_match('/' . $this->_current_update->targetplatform->version . '/', $ver->RELEASE))
 				{
-					if (isset($this->_latest))
+					// Check if PHP version supported via <php_minimum> tag, assume true if tag isn't present
+					if (!isset($this->_current_update->php_minimum) || version_compare(PHP_VERSION, $this->_current_update->php_minimum->_data, '>='))
 					{
-						if (version_compare($this->_current_update->version->_data, $this->_latest->version->_data, '>') == 1)
-						{
-							$this->_latest = $this->_current_update;
-						}
+						$phpMatch = true;
 					}
 					else
 					{
-						$this->_latest = $this->_current_update;
+						$phpMatch = false;
+					}
+
+					if ($phpMatch)
+					{
+						if (isset($this->_latest))
+						{
+							if (version_compare($this->_current_update->version->_data, $this->_latest->version->_data, '>') == 1)
+							{
+								$this->_latest = $this->_current_update;
+							}
+						}
+						else
+						{
+							$this->_latest = $this->_current_update;
+						}
 					}
 				}
 				break;
@@ -265,7 +286,12 @@ class JUpdate extends JObject
 		//$this->$tag->_data .= $data;
 		// Throw the data for this item together
 		$tag = strtolower($tag);
-		$this->_current_update->$tag->_data .= $data;
+
+		//$this->_current_update->$tag->_data .= $data;
+		if (isset($this->_current_update->$tag))
+		{
+			$this->_current_update->$tag->_data .= $data;
+		}
 	}
 
 	/**
@@ -279,7 +305,18 @@ class JUpdate extends JObject
 	 */
 	public function loadFromXML($url)
 	{
-		if (!($fp = @fopen($url, 'r')))
+		$http = JHttpFactory::getHttp();
+
+		try
+		{
+			$response = $http->get($url);
+		}
+		catch (Exception $exc)
+		{
+			$response = null;
+		}
+
+		if (is_null($response) || ($response->code != 200))
 		{
 			// TODO: Add a 'mark bad' setting here somehow
 			JError::raiseWarning('101', JText::sprintf('JLIB_UPDATER_ERROR_EXTENSION_OPEN_URL', $url));
@@ -291,18 +328,16 @@ class JUpdate extends JObject
 		xml_set_element_handler($this->xml_parser, '_startElement', '_endElement');
 		xml_set_character_data_handler($this->xml_parser, '_characterData');
 
-		while ($data = fread($fp, 8192))
+		if (!xml_parse($this->xml_parser, $response->body))
 		{
-			if (!xml_parse($this->xml_parser, $data, feof($fp)))
-			{
-				die(
-					sprintf(
-						"XML error: %s at line %d", xml_error_string(xml_get_error_code($this->xml_parser)),
-						xml_get_current_line_number($this->xml_parser)
-					)
-				);
-			}
+			die(
+				sprintf(
+					"XML error: %s at line %d", xml_error_string(xml_get_error_code($this->xml_parser)),
+					xml_get_current_line_number($this->xml_parser)
+				)
+			);
 		}
+
 		xml_parser_free($this->xml_parser);
 		return true;
 	}

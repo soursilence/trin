@@ -2,7 +2,7 @@
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @since		1.6
  */
@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 JHtml::_('behavior.multiselect');
+JHtml::_('behavior.tooltip');
 
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
@@ -96,6 +97,11 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 				</td>
 				<td class="center">
 					<?php echo @$item->version != '' ? $item->version : '&#160;'; ?>
+					<?php if ($item->system_data) : ?>
+						<?php if ($tooltip = $this->createCompatibilityInfo($item->system_data)) : ?>
+							<?php echo JHtml::_('tooltip', $tooltip, JText::_('COM_INSTALLER_COMPATIBILITY_TOOLTIP_TITLE')); ?>
+						<?php endif; ?>
+					<?php endif; ?>
 				</td>
 				<td class="center">
 					<?php echo @$item->creationDate != '' ? $item->creationDate : '&#160;'; ?>

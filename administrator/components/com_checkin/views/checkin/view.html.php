@@ -2,7 +2,7 @@
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_checkin
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -44,9 +44,9 @@ class CheckinViewCheckin extends JViewLegacy
 	protected function addToolbar()
 	{
 		JToolBarHelper::title(JText::_('COM_CHECKIN_GLOBAL_CHECK_IN'), 'checkin.png');
+		JToolBarHelper::custom('checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		JToolBarHelper::divider();
 		if (JFactory::getUser()->authorise('core.admin', 'com_checkin')) {
-			JToolBarHelper::custom('checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
-			JToolBarHelper::divider();
 			JToolBarHelper::preferences('com_checkin');
 			JToolBarHelper::divider();
 		}

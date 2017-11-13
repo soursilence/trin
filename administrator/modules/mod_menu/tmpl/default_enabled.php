@@ -2,7 +2,7 @@
 /**
  * @package     Joomla.Administrator
  * @subpackage  mod_menu
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -39,7 +39,7 @@ if ($user->authorise('core.admin'))
 	$menu->addSeparator();
 }
 
-$chm = $user->authorise('core.admin', 'com_checkin');
+$chm = $user->authorise('core.manage', 'com_checkin');
 $cam = $user->authorise('core.manage', 'com_cache');
 
 if ($chm || $cam )

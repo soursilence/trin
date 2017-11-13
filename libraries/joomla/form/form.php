@@ -3,7 +3,7 @@
  * @package     Joomla.Platform
  * @subpackage  Form
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -1250,10 +1250,13 @@ class JForm
 			case 'URL':
 				if (empty($value))
 				{
-					return;
+					return false;
 				}
 				$value = JFilterInput::getInstance()->clean($value, 'html');
 				$value = trim($value);
+
+				// <>" are never valid in a uri see http://www.ietf.org/rfc/rfc1738.txt.
+				$value = str_replace(array('<', '>', '"'), '', $value);
 
 				// Check for a protocol
 				$protocol = parse_url($value, PHP_URL_SCHEME);
@@ -1265,14 +1268,17 @@ class JForm
 				{
 					$protocol = 'http';
 					// If it looks like an internal link, then add the root.
-					if (substr($value, 0) == 'index.php')
+					if (substr($value, 0, 9) == 'index.php')
 					{
 						$value = JURI::root() . $value;
 					}
 
-					// Otherwise we treat it is an external link.
-					// Put the url back together.
-					$value = $protocol . '://' . $value;
+					// Otherwise we treat it as an external link.
+					else
+					{
+						// Put the url back together.
+						$value = $protocol . '://' . $value;
+					}
 				}
 
 				// If relative URLS are allowed we assume that URLs without protocols are internal.

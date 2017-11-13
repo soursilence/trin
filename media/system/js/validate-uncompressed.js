@@ -1,5 +1,5 @@
 /**
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -51,7 +51,7 @@ var JFormValidator = new Class({
 
 		this.setHandler('email',
 			function (value) {
-				regex=/^[a-zA-Z0-9._-]+(\+[a-zA-Z0-9._-]+)*@([a-zA-Z0-9.-]+\.)+[a-zA-Z0-9.-]{2,4}$/;
+				regex=/^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 				return regex.test(value);
 			}
 		);
@@ -93,7 +93,7 @@ var JFormValidator = new Class({
 		el = document.id(el);
 
 		// Ignore the element if its currently disabled, because are not submitted for the http-request. For those case return always true.
-		if(el.get('disabled')) {
+		if(el.get('disabled') && !(el.hasClass('required'))) {
 			this.handleResponse(true, el);
 			return true;
 		}

@@ -3,7 +3,7 @@
  * @package     Joomla.Platform
  * @subpackage  Application
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -112,38 +112,9 @@ class JApplicationWeb
 	 */
 	public function __construct(JInput $input = null, JRegistry $config = null, JWebClient $client = null)
 	{
-		// If a input object is given use it.
-		if ($input instanceof JInput)
-		{
-			$this->input = $input;
-		}
-		// Create the input based on the application logic.
-		else
-		{
-			$this->input = new JInput;
-		}
-
-		// If a config object is given use it.
-		if ($config instanceof JRegistry)
-		{
-			$this->config = $config;
-		}
-		// Instantiate a new configuration object.
-		else
-		{
-			$this->config = new JRegistry;
-		}
-
-		// If a client object is given use it.
-		if ($client instanceof JWebClient)
-		{
-			$this->client = $client;
-		}
-		// Instantiate a new web client object.
-		else
-		{
-			$this->client = new JWebClient;
-		}
+		$this->input  = $input  ? $input : new JInput;
+		$this->config = $config ? $config : new JRegistry;
+		$this->client = $client ? $client : new JWebClient;
 
 		// Load the configuration object.
 		$this->loadConfiguration($this->fetchConfigurationData());

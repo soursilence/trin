@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -85,6 +85,7 @@ abstract class multilangstatusHelper
 		$db		= JFactory::getDBO();
 		$query	= $db->getQuery(true);
 		$query->select('language');
+		$query->select('id');
 		$query->from($db->quoteName('#__menu'));
 		$query->where('home = 1');
 		$query->where('published = 1');
