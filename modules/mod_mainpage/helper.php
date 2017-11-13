@@ -7,7 +7,7 @@ defined('_JEXEC') or die ('Brak dostępu');
 
 class modMainpageHelper
 {
-	function getSomething($params,$id)
+	public static function getSomething($params,$id)
 	{
 	  $db =& JFactory::getDBO();
 	  $r = null;
@@ -19,7 +19,7 @@ class modMainpageHelper
 	  $r = $db->loadObjectList();
 	  return $r;
 	}
-	function getSomethingElse($params)
+	public static function getSomethingElse($params)
 	{//Nasze Projekty
 	  $db =& JFactory::getDBO();
 	  $r = null;

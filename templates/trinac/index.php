@@ -18,99 +18,160 @@ if($document->title!=$mainframe->getCfg('sitename'))
 $document->setTitle($document->title. " - " . $mainframe->getCfg('sitename'));
 else $document->setTitle('Usługi dźwigowe - dźwigi - żurawie wieżowe - TRINAC Polska');
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<!doctype html>
+<html lang="pl">
   <head>
   	<title><?php echo $document->title; //Usługi dźwigowe – dźwigi – żurawie wieżowe - TRINAC Polska ?></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseurl ?>/templates/trinac/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseurl ?>/templates/trinac/css/jqueryslidemenu.css" />
-    <!--[if lte IE 7]>
-<style type="text/css">
-html .jqueryslidemenu{height: 1%;} /*Holly Hack for IE7 and below*/
-</style>
-<![endif]-->
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="templates/trinac/css/style.css">
 
-<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/trinac/js/jquery.js"></script>
-<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/trinac/js/jqueryslidemenu.js"></script>
-<link href="/www/templates/trinac/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseurl ?>/templates/trinac/css/style_tv.css" />
-    <jdoc:include type="head" />
-<script>
-/* tv-js */
- $(document).ready(function(){
-      $('.tvright').load('<?php echo $this->baseurl ?>/modules/mod_mainpage/tv_content.php?nr=1');
-      var fakethis = $('#pos1 ul li:eq(0)');
-      
-      $('#pos1 ul li a').click(function(){
-        fakethis = $(this).parent()
-        tvclick (fakethis); 
-        return false;
-      });
-      
-      $('#pos1 ul li').click(function(){
-        fakethis = $(this);
-        tvclick (fakethis);
-      });
-      
-      function tvclick(fakethis) {
-        $(fakethis).siblings().removeClass('active').end().addClass('active') 
-         i = fakethis.index();
-         var rtvh = $('a', fakethis).attr('href')
-         var rtvc = 'url("<?php echo $this->baseurl ?>/templates/trinac/img/img' + $(fakethis).index() + '.jpg")' 
-         $('#pos1').css('background-image', rtvc) 
-         $('.tvright').load(rtvh);
-        return false; 
-         
-      }
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    
      
-      var i = 1
-      var petla = $('#pos1 ul li').size() -1;
-      
-      function nextfake(i) {
-        fakethis = $('#pos1 ul li:eq('+i+')')
-        tvclick(fakethis)
-      }
-      
-      setInterval(function () {
-        if (i<=petla)
-        {
-        nextfake(i);
-        }
-        else {i=0;nextfake(i);}
-        ++i;
-        }, 4000);  
-       
-   });   
-</script>
-<script type="text/javascript" src="lightbox/js/prototype.js"></script>
-<script type="text/javascript" src="lightbox/js/scriptaculous.js?load=effects,builder"></script>
-<script type="text/javascript" src="lightbox/js/lightbox.js"></script>  
-<link rel="stylesheet" href="lightbox/css/lightbox.css" type="text/css" media="screen" />
-</head>
+  </style>
+<!--<script type="text/javascript" src="lightbox/js/lightbox.js"></script>  
+<link rel="stylesheet" href="lightbox/css/lightbox.css" type="text/css" media="screen" />-->
+        <style type="text/css">
+            .dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+/*.dropdown-submenu:hover>.dropdown-menu{display:block;}*/
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+        </style>
+   <script type='text/javascript'>
+        
+        $(document).ready(function() {
+        
+            $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+    // Avoid following the href location when clicking
+    event.preventDefault(); 
+    // Avoid having the menu to close when clicking
+    event.stopPropagation(); 
+    // If a menu is already open we close it
+    //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+    // opening the one you clicked on
+    $(this).parent().addClass('open');
+
+    var menu = $(this).parent().find("ul");
+    var menupos = menu.offset();
+  
+    if ((menupos.left + menu.width()) + 30 > $(window).width()) {
+        var newpos = - menu.width();      
+    } else {
+        var newpos = $(this).parent().width();
+    }
+    menu.css({ left:newpos });
+
+});
+        
+        });
+        
+        </script>
+  </head>
 <body>
-<div id="wszystko">
-  <div id="top_menu">
-    <h2><a href="/">Trinac POLSKA</a></h2>
-    <ul>
-      <li><a href="?option=com_content&view=article&id=42&Itemid=38">Kontakt</a></li>
+
+<!--<header id="header" class="header header--fixed hide-from-print headroom headroom--top">
+top
+top
+<div id="navigation">
+<div class="navbar navbar-default">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+                <div id="brand">
+                                <a href="/index.php">
+                                         <img style="width:178px; height:94px; " src="http://trinac.pl/templates/trinac/img/Trinac_Polska_072dpi.jpg" alt="Logo">
+                                        </a>
+                        </div>
+</div>
+<div class="navbar-collapse collapse">
+                        <nav class="navigation">
+                                <ul class="nav menunav navbar-nav navbar-right">
+<li class="item-21 current active"><a href="/index.php?option=com_content&amp;view=featured&amp;Itemid=21">Головна</a></li><li class="item-2 deeper parent dropdown"><a href="/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=80&amp;Itemid=2" class="dropdown-toggle" data-toggle="dropdown">Новини<b class="caret"></b></a><ul class="nav-child unstyled small dropdown-menu"><li class="item-227"><a href="/index.php?option=com_content&amp;view=featured&amp;Itemid=227">aktu 1</a></li></ul></li><li class="item-3"><a href="/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=81&amp;Itemid=3">Статті</a></li><li class="item-4"><a href="/index.php?option=com_ozakonie&amp;Itemid=4">Про Чин</a></li><li class="item-5"><a href="http://b.bazylianie.pl" target="_blank" rel="noopener noreferrer">Бібліотека</a></li><li class="item-6"><a href="/index.php?option=com_content&amp;view=article&amp;id=689&amp;Itemid=6">Лінки</a></li><li class="item-7"><a href="/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=84&amp;Itemid=7">Парафії</a></li><li class="item-8"><a href="/index.php?option=com_content&amp;view=article&amp;id=707&amp;Itemid=8">Контакти</a></li></ul>
+
+                        </nav>
+                        </div>
+</div>
+</div></div>
+</header>-->
+<!--<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="/"><img style="width:154px; height:72px; " src="templates/trinac/img/Trinac_Polska_072dpi.jpg" alt="Trinac POLSKA"></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="?option=com_content&view=article&id=42&Itemid=38">Kontakt</a></li>
       <li><span>|</span></li>
+      <li><a href="?option=com_xmap">Mapa Strony</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>-->
+    
+<div class="container">
+    <div class="row">
+  <div class="col-md-8 col-xs-12">
+    <h2><a href="/"><img style="width:154px; height:72px; " src="templates/trinac/img/Trinac_Polska_072dpi.jpg" alt="Trinac POLSKA"></a></h2>
+  </div>
+  <div class="col-md-4 hidden-xs">
+    <ul class="nav navbar-nav navbar-right ">
+      <li><a href="?option=com_content&view=article&id=42&Itemid=38">Kontakt</a></li>
+      
       <li><a href="?option=com_xmap">Mapa Strony</a></li>
       
     </ul>
   </div>
-  <jdoc:include type="modules" name="menu" style="rounded" />
-<div class="search_form">
+    </div>
+    <div class="row navbar navbar-default">
+
+  <div class="col-md-9 ">
+    <jdoc:include type="modules" name="menu" style="rounded" />
+  </div>
+  <div class="col-md-3">
+      <div class="input-group search-input-group">
+    <div class="search_form">
        	  	<form action="" method="get"  id="form1">
    	      	<span id="search">
-   	       		<input name="searchword" id="searchfield" type="text" class="input" accesskey="s" tabindex="1" value="" />
+   	       		<input name="searchword" id="searchfield" type="text" class="form-control" size="10" accesskey="s" tabindex="1" value="" />
    	       	<input type="hidden" name="ordering" value="newest" /><input type="hidden" name="searchphrase" value="any" /><input type="hidden" name="option" value="com_search" />
             </span>
-            <input name="" type="submit" class="ok" value="OK" />
+            <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-search"></span> Szukaj
+        </button>
           </form>
-    	</div>
+    </div>    </div>
 
- <?php if($this->countModules('mainpage')){ ?>
+  </div>
+        </div>
+
+</div>
+
+
+
+<div class="container">
+<div id="main" class="row show-grid">
+
+<div id="container">
+     <?php if($this->countModules('mainpage')){ ?>
 
      <jdoc:include type="modules" name="mainpage" style="rounded" />
    
@@ -129,18 +190,31 @@ html .jqueryslidemenu{height: 1%;} /*Holly Hack for IE7 and below*/
    ?>
 
   <div id="bb">
-  <img src="<?php echo $this->baseurl ?><?php echo $ban; ?>" alt="Trinac" />
+  <img style="width: 100%" src="<?php echo $this->baseurl ?><?php echo $ban; ?>" alt="Trinac" />
   </div>
-  <div id="lewemenu"><jdoc:include type="modules" name="left" style="rounded" /></div>
-  <div id="tresc">
+<div class="row">   
+  <div class="col-sm-2">   
+    <jdoc:include type="modules" name="left" style="rounded" /></div>
+  <div class="col-sm-10">
     <jdoc:include type="component" />
   </div>
+</div>
 <?php } ?>
 
-<div id="stopka">
-<P style="font-size: small; color: #000; text-align:right;"><jdoc:include type="modules" name="footer" style="rounded" /><a href="http://www.trinac.de">TRINAC GmbH </a></p>Copyright &copy; <?php echo date("Y"); ?>  TRINAC Polska </div>
+</div>
+</div>
+
+
+
+
 
 </div>
+<div id="stopka" class="container">
+<p style="font-size: small; color: #000; text-align:right;">
+<jdoc:include type="modules" name="footer" style="rounded" />
+<a href="http://www.trinac.de">TRINAC GmbH </a></p>Copyright &copy; <?php echo date("Y"); ?>  TRINAC Polska </div>
+
+
 <!-- start AlienSTATS code -->
 
 <script language="javascript">
@@ -175,5 +249,10 @@ document.write('<scr'+'ipt language="JavaScript" src="'+alienPath+'/astat.js?ali
   })();
 
 </script>
-</body>
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+
 </html>
