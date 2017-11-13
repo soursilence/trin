@@ -23,7 +23,7 @@ else { $linktype = $item->title;
 switch ($item->browserNav) :
 	default:
 	case 0:
-?><a <?php echo $class; ?>href="<?php echo $item->flink; ?>" <?php echo $title; ?>><?php echo $linktype; ?></a><?php
+?><a <?php echo $class; ?>href="<?php echo $item->flink; ?>"  <?php if($item->flink=='#'){ echo 'data-toggle="dropdown"'; }?> <?php echo $title; ?>><?php echo $linktype; ?><?php if($item->flink=='#'){ echo '<span class="caret"></span></a>'; }?></a><?php
 		break;
 	case 1:
 		// _blank

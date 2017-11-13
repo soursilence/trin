@@ -12,7 +12,13 @@ defined('_JEXEC') or die;
 // Note. It is important to remove spaces between elements.
 ?>
 
-<ul class="menu<?php echo $class_sfx;?>"<?php
+<div class=" ">
+  <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+<ul id="myNavbar" class="nav navbar-nav collapse navbar-collapse <?php echo $class_sfx;?>"<?php
 	$tag = '';
 	if ($params->get('tag_id')!=NULL) {
 		$tag = $params->get('tag_id').'';
@@ -46,7 +52,10 @@ foreach ($list as $i => &$item) :
 	if ($item->parent) {
 		$class .= ' parent';
 	}
-
+        if ($item->level==2&&$item->deeper) {
+		$class .= ' dropdown-submenu';
+	}
+// menu-item dropdown dropdown-submenu
 	if (!empty($class)) {
 		$class = ' class="'.trim($class) .'"';
 	}
@@ -68,7 +77,7 @@ foreach ($list as $i => &$item) :
 
 	// The next item is deeper.
 	if ($item->deeper) {
-		echo '<ul>';
+		echo '<ul class="nav-child unstyled small dropdown-menu">';
 	}
 	// The next item is shallower.
 	elseif ($item->shallower) {
@@ -81,3 +90,4 @@ foreach ($list as $i => &$item) :
 	}
 endforeach;
 ?></ul>
+</div>
