@@ -26,71 +26,7 @@ if($swieta==true) $banner = 'http://trinac.pl/images/TRINAC-e-kartka.jpg';
 
 <div class="row">
 <div id="leftcol" class="col-md-4 visible-md visible-lg">
-    <style>
-        .map-container{
-            background: url('templates/trinac/img/polska.png');
-            width: 356px;
-            height: 325px;
-            display: block;
-            position: relative;
-        }
-        .map-cities{
-           background: url('templates/trinac/img/cities-logo.png') no-repeat; 
-           height: 17px;
-           padding-left: 20px;
-           background-position: 0px 2px; 
-           display: block;
-           position: absolute;
-           cursor: pointer;
-        }
-        .map-poz{
-           left: 85px;
-           top: 125px;
-        }
-        .map-waw{
-           left: 235px;
-           top: 140px;
-        }
-        .map-kra{
-           left: 195px;
-           top: 270px;
-        }
-        .map-citi-desc{
-            position: absolute;
-            background: #fff;
-            left: 30px;
-            top: 30px;
-            border: 1px solid #000;
-            padding: 10px;
-            font-size: 11px;
-            display: none;
-        }
-        .desc-close{
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            cursor: pointer;
-        }
-        </style>
-        <script type="text/javascript">
-            $( document ).ready(function() {
-                $(".map-poz").click(function(){
-                    $(".map-citi-desc").hide();
-                    $(".desc-poz").show();
-                });
-                $(".map-waw").click(function(){
-                    $(".map-citi-desc").hide();
-                    $(".desc-waw").show();
-                });
-                $(".map-kra").click(function(){
-                    $(".map-citi-desc").hide();
-                    $(".desc-kra").show();
-                });
-                 $(".desc-close").click(function(){
-                    $(".map-citi-desc").hide();
-                });
-});
-            </script>
+
     <div class="map-container">
         <div class="map-cities map-poz">Poznań</div>
         <div class="map-cities map-waw">Warszawa</div>
