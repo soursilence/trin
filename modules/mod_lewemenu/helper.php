@@ -34,10 +34,11 @@ if($_parent >0)
 {	  
 	  while($start){
 	  $zap = "SELECT parent_id FROM #__menu WHERE menutype = 'mainmenu' AND published=1 AND id = ".$_parent." LIMIT 1"; // and published=1 
+          
 	    $db->setQuery($zap);
 	    $parent_new = $db->loadResult();
 			  
-	    if($parent_new ==1){
+	    if($parent_new == 1 || $parent_new == null){
 	      $start = false;
 	    }
 	    else{ $_parent = $parent_new; $parents[] = $parent_new;}
