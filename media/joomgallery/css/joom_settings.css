@@ -29,11 +29,11 @@ joom_local.css.README umbenennen und anpassen
 
 /* Category view */
 .jg_element_cat {
-  width:49%;
+  width:33%;
   float:left;
 }
 .jg_catelem_cat a{
-  height:100px;
+  height:150px;
 }
 .jg_catelem_photo {
   float:left;
@@ -44,12 +44,12 @@ joom_local.css.README umbenennen und anpassen
 
 /* Subcategory view */
 .jg_subcatelem_cat, .jg_subcatelem_cat_r{
-  width:49%;
+  width:33%;
   float:left;
   text-align:center !important;
 }
 .jg_subcatelem_cat a{
-  height:100px;
+  height:150px;
 }
 .jg_subcatelem_photo {
   text-align:center !important;
@@ -80,21 +80,6 @@ joom_local.css.README umbenennen und anpassen
   float:left;
 }
 .jg_topelem_txt, .jg_favelem_txt {
-  text-align:left !important;
-  width:49%;
-  float:left;
-}
-
-/* Search view*/
-.jg_searchelement {
-  width:99%;
-  height:auto;
-}
-.jg_searchelem_photo {
-  width:49%;
-  float:left;
-}
-.jg_searchelem_txt {
   text-align:left !important;
   width:49%;
   float:left;

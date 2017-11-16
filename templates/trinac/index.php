@@ -42,7 +42,7 @@ echo 'Usługi dźwigowe – dźwigi – żurawie wieżowe - TRINAC Polska';
                 </div>
                 <div class="col-md-4 hidden-xs">
                     <ul class="nav navbar-nav navbar-right topmenu">
-                        <li><a href="?option=com_content&view=article&id=42&Itemid=38">Kontakt</a></li>
+                        <li><a href="/kontakt">Kontakt</a></li>
 
                         <li><a href="?option=com_xmap">Mapa Strony</a></li>
 
