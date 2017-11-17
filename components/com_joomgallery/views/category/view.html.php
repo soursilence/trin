@@ -460,7 +460,7 @@ class JoomGalleryViewCategory extends JoomGalleryView
       $categories[$key]->totalhits = $imgshits[1];
 
       $category->thumb_src = null;
-      $category->gallerycontainer = 'jg_subcatelem_cat';
+      $category->gallerycontainer = ' col-lg-4 col-md-4 col-sm-6 col-xs-12'; //jg_subcatelem_cat
       $category->photocontainer   = 'jg_subcatelem_photo';
       $category->textcontainer    = 'jg_subcatelem_txt';
       if($this->_config->get('jg_showsubthumbs') > 0 && in_array($categories[$key]->access, $this->_user->getAuthorisedViewLevels()))
