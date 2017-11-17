@@ -102,7 +102,7 @@ echo 'Usługi dźwigowe – dźwigi – żurawie wieżowe - TRINAC Polska';
                         <div class="row">   
                             <div class="col-sm-2">   
                                 <jdoc:include type="modules" name="left" style="rounded" /></div>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 main-container">
                                 <jdoc:include type="component" />
                             </div>
                         </div>

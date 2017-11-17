@@ -65,7 +65,7 @@ footer {
     margin-bottom: 5px;
 }
 #searchfield{
-    width: 150px;
+    width: 140px;
 }
 #mainh3{
     color: #024A94;
@@ -254,4 +254,5 @@ font-weight: 700 !important;
         -moz-column-count: 1; /* Firefox */
         column-count: 1;
     }
+    .main-container {padding: 25px !important;}
 }
