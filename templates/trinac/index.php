@@ -134,10 +134,9 @@ top
   </div>
   <div class="col-md-4 hidden-xs">
     <ul class="nav navbar-nav navbar-right ">
+      <li><a href="/att/polityka_prywatnosci_trinac_polska.pdf">Polityka prywatności</a></li>
       <li><a href="?option=com_content&view=article&id=42&Itemid=38">Kontakt</a></li>
-      
-      <li><a href="?option=com_xmap">Mapa Strony</a></li>
-      
+      <li><a href="?option=com_xmap">Mapa Strony</a></li>   
     </ul>
   </div>
     </div>
@@ -212,6 +211,7 @@ top
 <div id="stopka" class="container">
 <p style="font-size: small; color: #000; text-align:right;">
 <jdoc:include type="modules" name="footer" style="rounded" />
+<a href="/att/polityka_prywatnosci_trinac_polska.pdf">Polityka prywatności</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="http://www.trinac.de">TRINAC GmbH </a></p>Copyright &copy; <?php echo date("Y"); ?>  TRINAC Polska </div>
 
 
